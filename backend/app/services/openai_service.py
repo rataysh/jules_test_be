@@ -24,8 +24,7 @@ async def get_news_from_openai(request: NewsRequest) -> str:
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
             ],
-            temperature=0.7,
-            max_tokens=2048,
+            max_completion_tokens=2048,
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
