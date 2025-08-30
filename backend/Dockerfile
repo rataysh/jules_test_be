@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy the rest of the application's code into the container at /app
 COPY ./app /app/app
+COPY ./tests /app/tests
 
 # Expose port 8000 to the outside world
 EXPOSE 8000
