@@ -1,0 +1,12 @@
+[
+  {
+    "name": "auth_token",
+    "value": "YOUR_AUTH_TOKEN_HERE",
+    "domain": ".twitter.com",
+    "path": "/",
+    "expires": 17xxxxxxxxx,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  }
+]

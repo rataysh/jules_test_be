@@ -8,9 +8,12 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app/app
+      - ./cookies.json:/app/cookies.json
     environment:
       - PYTHONPATH=/app
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TWITTER_USERNAME=${TWITTER_USERNAME}
+      - TWITTER_COOKIES_FILE=${TWITTER_COOKIES_FILE}
     env_file:
       - .env
 
@@ -20,4 +23,5 @@ services:
     environment:
       - PYTHONPATH=/app
       - OPENAI_API_KEY=test
+      - TWITTER_USERNAME=testuser
     command: ["pytest"]

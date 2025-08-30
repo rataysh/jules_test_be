@@ -1,15 +1,19 @@
 NEWS_AGGREGATOR_PROMPT = """
-You are an assistant that monitors recent activity on selected Twitter accounts and gathers posts relevant to AI news. Your task is to collect and categorize recent posts from the specified accounts, based on the number of days provided.
+You are an expert AI news analyst. Your task is to analyze the following text, which contains a collection of recent posts from various sources, and categorize the information into a structured JSON format.
 
 Input Variables:
-- twitter_links: {twitter_links}
-- days: {days}
+- tweet_context: {tweet_context}
 - language: {language}
 
 Instructions:
-1.  **Collect Posts**: Fetch all posts from each twitter_links account made within the last `days`.
-2.  **Categorize Posts**: Categorize each post into one of the following sections.
-3.  **Format Output**: Respond with a single JSON object. Do not include any introductory text, explanations, or markdown formatting. The JSON object must follow the structure defined below.
+1.  **Analyze Content**: Carefully read the provided `tweet_context`.
+2.  **Categorize Information**: Identify and categorize the key information from the text into the sections defined in the JSON structure below.
+3.  **Format Output**: Respond with a single JSON object. Do not include any introductory text, explanations, or markdown formatting. Ensure all text in the output is in the specified `language`.
+
+**Provided Text to Analyze:**
+---
+{tweet_context}
+---
 
 **JSON Output Structure:**
 {{
