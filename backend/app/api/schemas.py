@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
+
 class NewsRequest(BaseModel):
     twitter_links: Optional[List[str]] = Field(
         default=[
@@ -26,5 +27,27 @@ class NewsRequest(BaseModel):
             "https://x.com/sama?t=XjqZUzbTEYgqTquLdJjisg&s=09",
         ]
     )
-    days: int = Field(default=3, ge=1)
+    days: int = Field(default=7, ge=1)
     language: str = Field(default="Russian")
+
+
+class NewsItem(BaseModel):
+    detail: str
+    link: str
+
+
+class CompanyNews(BaseModel):
+    company: str
+    updates: List[NewsItem]
+
+
+class RumorItem(BaseModel):
+    theme: str
+    sources: List[str]
+
+
+class NewsResponse(BaseModel):
+    official_news: Optional[List[CompanyNews]] = None
+    upcoming_announcements: Optional[List[CompanyNews]] = None
+    rumors_and_hot_topics: Optional[List[RumorItem]] = None
+    error: Optional[str] = None

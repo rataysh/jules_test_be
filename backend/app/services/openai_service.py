@@ -1,3 +1,4 @@
+import json
 from openai import AsyncOpenAI
 from app.api.schemas import NewsRequest
 from app.core.config import settings
@@ -5,7 +6,7 @@ from app.core.prompts import NEWS_AGGREGATOR_PROMPT
 
 client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
-async def get_news_from_openai(request: NewsRequest) -> str:
+async def get_news_from_openai(request: NewsRequest) -> dict:
     """
     Generates a news summary by calling the OpenAI API.
     """
@@ -24,10 +25,10 @@ async def get_news_from_openai(request: NewsRequest) -> str:
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
             ],
-            max_completion_tokens=2048,
+            response_format={"type": "json_object"},
         )
-        return response.choices[0].message.content.strip()
+        return json.loads(response.choices[0].message.content)
     except Exception as e:
         # Handle potential API errors, e.g., authentication, rate limits
         print(f"An error occurred: {e}")
-        return "Error: Could not retrieve news summary."
+        return {"error": "Could not retrieve news summary."}
